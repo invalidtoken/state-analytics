@@ -1,0 +1,106 @@
+*{
+  box-sizing: border-box;
+  outline: none;
+}
+
+body{
+  background-color: #f5f5f5;
+  font-family: 'Roboto', sans-serif;
+}
+
+html, body, h1, h2, h3, h4, p, ul{
+  padding: 0px;
+  margin: 0px;
+}
+
+ul{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+  display: inline-block;
+}
+
+.container{
+  width: 95%;
+  margin: 0px auto;
+}
+
+
+/* =============================== Selection Styles ============================= */
+
+.header{
+  background-color: #009688;
+  padding: 10px 0px;
+}
+
+.header h1{
+  color: white;
+}
+
+.selections{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.selections select{
+  padding: 5px 10px;
+  margin: 0px 10px;
+  border: 0px;
+}
+
+
+/* ============================= Analytics Style ======================= */
+.analyticsDiv{
+  margin: 20px 0px;
+}
+
+.analytics{
+  margin-bottom: 30px;
+}
+
+.analyticsHeader{
+  background-color: #424242;
+  color: #fff;
+  padding: 10px;
+}
+
+.analyticsList li{
+  padding: 10px;
+  margin: 7px 0px;
+  background-color: white;
+  box-shadow: 2px 2px 4px #000;
+}
+
+li.badValue{
+  color: #f44336;
+}
+
+li.decentValue{
+  color: #ff5722;
+}
+
+li.goodValue{
+  color: #4caf50;
+}
+
+@media(min-width: 900px){
+  .analyticsDiv{
+    display: flex;
+  }
+
+  .analytics{
+    margin: 0px 5px;
+    flex-grow: 1;
+  }
+}
+
+
+@media(min-width: 1200){
+  .analytics{
+    margin: 0px 10px;
+    flex-grow: 1;
+  }
+}
