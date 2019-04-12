@@ -1,11 +1,24 @@
 require("../../mongooseSetup/mongooseSetup");
 const express = require("express");
+const app = express();
 const countryData = require("../data/country_hmr_percentile.json");
 const stateData = require("../data/state_wise_median_hmr.json");
-const app = express();
 const port = process.env.PORT || 8000;
 const path = require("path");
 const mapMonth = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+// Helper Functions 
+const sortArr = (arr) => {
+  arr.sort((a, b) => {
+    if(a.key < b.key){
+      return -1;
+    }else if(a.key > b.key){
+      return 1;
+    }else{
+      return 0;
+    }
+  });
+};
 
 const filterStateData = () => {
   let finalStateObj = {};
@@ -20,21 +33,13 @@ const filterStateData = () => {
       finalMonths.push(monthObj);
     });
 
-    finalMonths.sort((a, b) => {
-      if(a.key < b.key){
-        return -1;
-      }else if(a.key > b.key){
-        return 1;
-      }else{
-        return 0;
-      }
-    });
+    sortArr(finalMonths);
     finalStateObj[eachYear.key] = finalMonths;
   });
   return finalStateObj;
 }
 
-
+// @GET - "/api/countrydata"
 app.get("/api/countrydata", (request, response) => {
   let buckets = countryData.aggregations.year.buckets;
   let finalObj = {};
@@ -49,25 +54,19 @@ app.get("/api/countrydata", (request, response) => {
       finalMonths.push(filteredMonth);
     });
 
-    finalMonths.sort((a, b) => {
-      if(a.key < b.key){
-        return -1;
-      }else if(a.key > b.key){
-        return 1;
-      }else{
-        return 0;
-      }
-    });
+    sortArr(finalMonths);
     finalObj[eachYear.key] = finalMonths;
   });
   response.json(finalObj);
 });
 
+// @GET - "/api/statedata"
 app.get("/api/statedata", (request, response) => {
   let finalStateObj = filterStateData();
   response.json(finalStateObj);
 });
 
+// @GET - "/api/startdata/:year/:month"
 app.get("/api/statedata/:year/:month", (request, response) => {
   let finalStateObj = filterStateData();
   let yearData = finalStateObj[request.params.year];

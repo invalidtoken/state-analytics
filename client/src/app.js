@@ -71,7 +71,8 @@ class App extends React.Component {
         },
         selectedYear: givenYears[0],
         selectedMonth: countryData[givenYears[0]][0].month.toLowerCase(),
-        stateData: null
+        stateData: null,
+        results: null
       };
     });
   }

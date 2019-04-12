@@ -4,8 +4,11 @@ export default function Results(props){
   let lessThan45 = [];
   let between45And60 = [];
   let greaterThan60 = [];
+
+
   let hmrPercentile = props.results.selectedHMRPercentile.hmrPercentiles;
   let states = props.results.stateData.states;
+  
   states.forEach((eachState) => {
     let state = eachState.key;
     let value = eachState.hmrPercentiles.values["50.0"];
@@ -18,10 +21,6 @@ export default function Results(props){
       greaterThan60.push({ state, value });
     }
   });
-  console.log(lessThan45);
-  console.log(between45And60);
-  console.log(greaterThan60);
-  console.log(lessThan45.length + between45And60.length + greaterThan60.length);
   return (
     <div className="container">
       <div className="analyticsDiv">
