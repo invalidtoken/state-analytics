@@ -10,6 +10,6 @@ cd state-analytics
 # Install dependencies
 npm install
 
-# Build for production
+# Build for development
 npm run dev
 ```
